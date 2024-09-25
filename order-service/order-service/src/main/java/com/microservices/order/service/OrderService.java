@@ -18,7 +18,7 @@ public class OrderService {
         Order order = new Order();
         order.setOrder_no(UUID.randomUUID().toString());
         order.setPrice(orderRequest.price());
-        order.setSku_Code(orderRequest.sku_Code());
+        order.setSkuCode(orderRequest.skuCode());
         order.setQuantity(orderRequest.quantity());
         or.save(order);
     }

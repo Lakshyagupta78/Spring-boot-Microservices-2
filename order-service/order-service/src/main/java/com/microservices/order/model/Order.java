@@ -20,7 +20,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String order_no;
-    private String sku_Code;
+
+    @Column(name = "sku_code") // Map this field to the column "sku_code"
+    private String skuCode;
+
     private BigDecimal price;
     private Integer quantity;
 }
