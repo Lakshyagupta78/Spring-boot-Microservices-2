@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/inventory")
+@RequestMapping("/api/inventory")
 public class InventoryController {
 
     @Autowired
     private InventoryService is;
 
-    @GetMapping("/get")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public boolean isInStock(@RequestParam String skuCode, @RequestParam Integer quantity){
         return is.isInStock(skuCode,quantity);

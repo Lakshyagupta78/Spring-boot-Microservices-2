@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 public class ProductController {
 
     @Autowired
     private ProductService ps;
 
-    @PostMapping("/Create")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProductResponse createProduct(@RequestBody ProductRequest product){
         return ps.createProduct(product);
     }
 
-    @GetMapping("/AllProducts")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> allProduct(){
         return ps.getAllProducts();
