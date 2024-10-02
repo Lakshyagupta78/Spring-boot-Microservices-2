@@ -1,2 +1,10 @@
 **/mysql/mysql.sock
 **/mysql/binlog.*
+api-gateway/api-gateway/volume-data/
+product-service/product-service/data/diagnostic.data/
+product-service/product-service/data/journal/
+microservices-shop-frontend-master/node_modules/
+
+
+
+
