@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -27,17 +28,23 @@ public class ProductService {
                 .name(productRequest.name())
                 .description((productRequest.description()))
                 .price(productRequest.price())
+                .quantity(productRequest.quantity())
                 .build();
-        pr.save(product);
-        log.info("Product Created Successfully");
-        return new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice());
+        try {
+            pr.save(product);
+            log.info("Product Created Successfully");
+            return new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getQuantity());
+        } catch (Exception e) {
+            log.error("Error creating product: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to create product");
+        }
     }
 
 
     public List<ProductResponse> getAllProducts() {
         return pr.findAll()
                 .stream()
-                .map(product -> new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice()))
+                .map(product -> new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getQuantity()))
                 .toList();
     }
 }

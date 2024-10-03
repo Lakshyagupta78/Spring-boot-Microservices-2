@@ -1,6 +1,8 @@
 package com.microservices.product.dto;
 
+import org.bson.types.ObjectId;
+
 import java.math.BigDecimal;
 
-public record ProductRequest(long id, String name, String description, BigDecimal price) {
+public record ProductRequest(String name, String description, BigDecimal price, int quantity) {
 }

@@ -1,6 +1,7 @@
 package com.microservices.order.service;
 
 import com.microservices.order.dto.OrderRequest;
+import com.microservices.order.event.OrderPlacedEvent;
 import com.microservices.order.feign.InventoryClient;
 import com.microservices.order.model.Order;
 import com.microservices.order.repository.OrderRepo;
@@ -31,11 +32,12 @@ public class OrderService {
         order.setSkuCode(orderRequest.skuCode());
         order.setQuantity(orderRequest.quantity());
         or.save(order);
-        }//else{
-//            throw new RuntimeException("Product is not in stock");
-//        }
-        else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product is not in stock");
+
+        }else{
+            throw new RuntimeException("Product is not in stock");
         }
+//        else {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product is not in stock");
+//        }
     }
 }
